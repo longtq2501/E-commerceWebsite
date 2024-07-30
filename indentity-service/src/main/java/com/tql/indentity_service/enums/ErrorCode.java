@@ -1,0 +1,24 @@
+package com.tql.indentity_service.enums;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Getter
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+public enum ErrorCode {
+    USER_NOT_FOUND(1001, "User not found"),
+    USER_EXISTS(1002, "User exists"),
+    UNAUTHORIZED(1003, "Unauthorized"),
+    NOT_CORRECT_PASSWORD(1004, "Uncorrect password"),
+    NOT_CORRECT_USERNAME(1005, "Uncorrect username"),
+    UNABLE_CREATE_TOKEN(1006, "Unable create token"),
+    INVALID_TOKEN(1007, "Invalid token"),;
+
+    private int code;
+    private String message;
+
+    ErrorCode(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+}
