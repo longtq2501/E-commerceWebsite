@@ -12,7 +12,8 @@ public enum ErrorCode {
     NOT_CORRECT_PASSWORD(1004, "Uncorrect password"),
     NOT_CORRECT_USERNAME(1005, "Uncorrect username"),
     UNABLE_CREATE_TOKEN(1006, "Unable create token"),
-    INVALID_TOKEN(1007, "Invalid token"),;
+    INVALID_TOKEN(1007, "Invalid token"),
+    USER_ALREADY_EXISTS(1008, "User already exists");
 
     private int code;
     private String message;

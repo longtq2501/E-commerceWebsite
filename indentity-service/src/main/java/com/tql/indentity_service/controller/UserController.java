@@ -1,11 +1,14 @@
 package com.tql.indentity_service.controller;
 
+import com.nimbusds.jose.proc.SecurityContext;
 import com.tql.indentity_service.dto.request.ApiResponse;
 import com.tql.indentity_service.dto.request.UserRequest;
 import com.tql.indentity_service.dto.response.UserResponse;
 import com.tql.indentity_service.service.impl.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +17,7 @@ import java.util.List;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
+@Slf4j
 public class UserController {
     UserService userService;
 
@@ -26,6 +30,10 @@ public class UserController {
 
     @GetMapping("/get-all")
     ApiResponse<List<UserResponse>> getAll() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info("Username: {}", authentication.getName());
+        authentication.getAuthorities().forEach(grantedAuthority -> log.info(grantedAuthority.getAuthority()));
+
         return ApiResponse.<List<UserResponse>>builder()
                 .result(userService.getAll())
                 .build();

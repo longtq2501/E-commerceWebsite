@@ -4,6 +4,8 @@ package com.tql.indentity_service.dto.response;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Set;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -12,4 +14,6 @@ import lombok.experimental.FieldDefaults;
 public class UserResponse {
     String id;
     String username;
+    String name;
+    Set<String> roles;
 }

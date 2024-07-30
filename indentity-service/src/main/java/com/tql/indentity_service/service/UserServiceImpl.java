@@ -4,6 +4,7 @@ import com.tql.indentity_service.dto.request.UserRequest;
 import com.tql.indentity_service.dto.response.UserResponse;
 import com.tql.indentity_service.enums.AppException;
 import com.tql.indentity_service.enums.ErrorCode;
+import com.tql.indentity_service.enums.Role;
 import com.tql.indentity_service.mapper.UserMapper;
 import com.tql.indentity_service.repository.UserRepository;
 import com.tql.indentity_service.service.impl.UserService;
@@ -15,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -29,10 +31,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse create(UserRequest request) {
+        if (userRepository.existsUserByUsername(request.getUsername())) {
+            throw new AppException(ErrorCode.USER_ALREADY_EXISTS);
+        }
         var user = userMapper.toUser(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        var save = userRepository.save(user);
-        return userMapper.toUserResponse(save);
+        user.setConfirmPassword(passwordEncoder.encode(request.getConfirmPassword()));
+
+        HashSet<String> roles = new HashSet<>();
+        roles.add(Role.USER.name());
+        user.setRoles(roles);
+
+        var saved = userRepository.save(user);
+        return userMapper.toUserResponse(saved);
     }
 
     @Override

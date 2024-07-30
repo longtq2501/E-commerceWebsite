@@ -11,5 +11,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserRequest {
     String username;
+    String name;
     String password;
+    String confirmPassword;
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Set;
+
 @Entity
 @Data
 @Builder
@@ -17,6 +19,15 @@ public class User {
 
     @Column(name = "username")
     String username;
+
+    @Column(name = "name")
+    String name;
+
     @Column(name = "password")
     String password;
+
+    @Column(name = "confirm_password")
+    String confirmPassword;
+
+    Set<String> roles;
 }
