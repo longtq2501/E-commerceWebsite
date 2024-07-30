@@ -13,8 +13,12 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.HashSet;
 import java.util.List;
@@ -47,7 +51,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public List<UserResponse> getAll() {
+        log.info("Get all users");
         var users = userRepository.findAll();
         return users.stream().map(userMapper::toUserResponse).toList();
     }
@@ -69,5 +75,18 @@ public class UserServiceImpl implements UserService {
     public void delete(String id) {
         var user = userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         userRepository.delete(user);
+    }
+
+    @Override
+    @PostAuthorize("returnObject.username == authentication.name")
+    public UserResponse getMyInfo() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(!userRepository.existsUserByUsername(authentication.getName())) {
+            throw new AppException(ErrorCode.USER_NOT_EXISTED);
+        }
+        else {
+            var user = userRepository.findByUsername(authentication.getName());
+            return userMapper.toUserResponse(user);
+        }
     }
 }

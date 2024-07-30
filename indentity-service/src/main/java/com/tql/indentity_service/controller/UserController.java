@@ -59,4 +59,11 @@ public class UserController {
         return ApiResponse.<Void>builder()
                 .build();
     }
+
+    @GetMapping("/get-my-info")
+    ApiResponse<UserResponse> getMyInfo() {
+        return ApiResponse.<UserResponse>builder()
+                .result(userService.getMyInfo())
+                .build();
+    }
 }
