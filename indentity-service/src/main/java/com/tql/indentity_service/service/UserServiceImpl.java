@@ -2,7 +2,7 @@ package com.tql.indentity_service.service;
 
 import com.tql.indentity_service.dto.request.UserRequest;
 import com.tql.indentity_service.dto.response.UserResponse;
-import com.tql.indentity_service.enums.AppException;
+import com.tql.indentity_service.exception.AppException;
 import com.tql.indentity_service.enums.ErrorCode;
 import com.tql.indentity_service.enums.Role;
 import com.tql.indentity_service.mapper.UserMapper;
@@ -18,7 +18,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.util.HashSet;
 import java.util.List;

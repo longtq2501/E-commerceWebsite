@@ -48,6 +48,7 @@ public class SecurityConfig {
                                 .decoder(jwtDecoder())
                                 .jwtAuthenticationConverter(jwtAuthenticationConverter())
                         )
+                                .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
                 )
                 .build();
     }

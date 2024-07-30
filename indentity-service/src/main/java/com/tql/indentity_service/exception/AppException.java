@@ -1,5 +1,6 @@
-package com.tql.indentity_service.enums;
+package com.tql.indentity_service.exception;
 
+import com.tql.indentity_service.enums.ErrorCode;
 import lombok.*;
 
 @Getter

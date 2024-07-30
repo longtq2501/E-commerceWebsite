@@ -10,7 +10,7 @@ import com.tql.indentity_service.dto.request.IntrospectRequest;
 import com.tql.indentity_service.dto.response.AuthenticateResponse;
 import com.tql.indentity_service.dto.response.IntrospectResponse;
 import com.tql.indentity_service.entity.User;
-import com.tql.indentity_service.enums.AppException;
+import com.tql.indentity_service.exception.AppException;
 import com.tql.indentity_service.enums.ErrorCode;
 import com.tql.indentity_service.repository.UserRepository;
 import com.tql.indentity_service.service.impl.AuthenticateService;
