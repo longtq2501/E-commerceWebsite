@@ -1,8 +1,8 @@
 package com.tql.indentity_service.controller;
 
-import com.nimbusds.jose.proc.SecurityContext;
 import com.tql.indentity_service.dto.request.ApiResponse;
-import com.tql.indentity_service.dto.request.UserRequest;
+import com.tql.indentity_service.dto.request.UserCreateRequest;
+import com.tql.indentity_service.dto.request.UserUpdateRequest;
 import com.tql.indentity_service.dto.response.UserResponse;
 import com.tql.indentity_service.service.impl.UserService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/create")
-    ApiResponse<UserResponse> create(@RequestBody UserRequest request) {
+    ApiResponse<UserResponse> create(@RequestBody UserCreateRequest request) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.create(request))
                 .build();
@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    ApiResponse<UserResponse> update (@RequestBody UserRequest request, @PathVariable String id) {
+    ApiResponse<UserResponse> update (@RequestBody UserUpdateRequest request, @PathVariable String id) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.update(request, id))
                 .build();

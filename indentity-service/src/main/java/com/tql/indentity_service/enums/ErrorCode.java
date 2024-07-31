@@ -19,6 +19,12 @@ public enum ErrorCode {
     USER_NOT_EXISTED(1009, "User not existed", HttpStatus.BAD_REQUEST),
     UNCATEGORIZED(1010, "Uncategorized", HttpStatus.INTERNAL_SERVER_ERROR),
     UNAUTHENTICATED(1011, "Unauthenticated", HttpStatus.UNAUTHORIZED),
+    PERMISSION_NOT_FOUND(1012, "Permission not found", HttpStatus.NOT_FOUND),
+    PERMISSION_EXISTED(1013, "Permission existed", HttpStatus.BAD_REQUEST),
+    ROLE_NOT_FOUND(1014, "Role not found", HttpStatus.NOT_FOUND),
+    ROLE_EXISTED(1015, "Role existed", HttpStatus.BAD_REQUEST),
+    ROLE_NOT_EXISTED(1017, "Role not existed", HttpStatus.BAD_REQUEST),
+    PERMISSION_NOT_ALLOWED(1020, "Permission not allowed", HttpStatus.BAD_REQUEST),
     ;
 
     private int code;

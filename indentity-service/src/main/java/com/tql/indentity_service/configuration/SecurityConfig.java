@@ -38,9 +38,11 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request ->
-                        request.requestMatchers(HttpMethod.POST,  "/user/create").permitAll()
+                        request
+                                .requestMatchers(HttpMethod.POST,  "/user/create").permitAll()
                                 .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
                                 .requestMatchers(HttpMethod.POST, "auth/introspect").permitAll()
+                                .requestMatchers(HttpMethod.POST, "role/delete/").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 ->

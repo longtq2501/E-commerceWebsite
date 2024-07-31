@@ -29,5 +29,6 @@ public class User {
     @Column(name = "confirm_password")
     String confirmPassword;
 
-    Set<String> roles;
+    @ManyToMany
+    Set<Role> roles;
 }

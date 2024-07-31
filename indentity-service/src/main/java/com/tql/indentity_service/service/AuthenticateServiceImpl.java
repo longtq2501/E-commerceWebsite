@@ -28,6 +28,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -84,7 +85,8 @@ public class AuthenticateServiceImpl implements AuthenticateService {
     }
 
     @Override
-    public IntrospectResponse introspect(IntrospectRequest request) throws JOSEException, ParseException {
+    public IntrospectResponse introspect(IntrospectRequest request)
+            throws JOSEException, ParseException {
         var token = request.getToken();
 
         JWSVerifier jwsVerifier = new MACVerifier(SIGNER_KEY.getBytes());
@@ -106,7 +108,13 @@ public class AuthenticateServiceImpl implements AuthenticateService {
     private String buildScope(User user) {
         StringJoiner stringJoiner = new StringJoiner(" ");
         if(!CollectionUtils.isEmpty(user.getRoles())) {
-            user.getRoles().forEach(stringJoiner::add);
+            user.getRoles().forEach(role -> {
+                stringJoiner.add(role.getName());
+                if (!CollectionUtils.isEmpty(role.getPermissions()))
+                    role.getPermissions().forEach(permission ->
+                            stringJoiner.add(permission.getName()));
+            });
+
         }
         return stringJoiner.toString();
     }

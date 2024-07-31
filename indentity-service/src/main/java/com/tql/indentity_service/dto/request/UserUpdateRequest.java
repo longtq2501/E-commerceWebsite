@@ -1,7 +1,6 @@
-package com.tql.indentity_service.dto.response;
+package com.tql.indentity_service.dto.request;
 
 
-import com.tql.indentity_service.entity.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -12,9 +11,10 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserResponse {
-    String id;
+public class UserUpdateRequest {
     String username;
     String name;
-    Set<Role> roles;
+    String password;
+    String confirmPassword;
+    Set<String> roles;
 }

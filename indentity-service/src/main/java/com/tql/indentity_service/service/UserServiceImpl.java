@@ -1,11 +1,14 @@
 package com.tql.indentity_service.service;
 
-import com.tql.indentity_service.dto.request.UserRequest;
+import com.tql.indentity_service.dto.request.UserCreateRequest;
+import com.tql.indentity_service.dto.request.UserUpdateRequest;
 import com.tql.indentity_service.dto.response.UserResponse;
+import com.tql.indentity_service.entity.Role;
+import com.tql.indentity_service.entity.User;
 import com.tql.indentity_service.exception.AppException;
 import com.tql.indentity_service.enums.ErrorCode;
-import com.tql.indentity_service.enums.Role;
 import com.tql.indentity_service.mapper.UserMapper;
+import com.tql.indentity_service.repository.RoleRepository;
 import com.tql.indentity_service.repository.UserRepository;
 import com.tql.indentity_service.service.impl.UserService;
 import lombok.AccessLevel;
@@ -31,9 +34,10 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
     UserMapper userMapper;
     PasswordEncoder passwordEncoder;
+    RoleRepository roleRepository;
 
     @Override
-    public UserResponse create(UserRequest request) {
+    public UserResponse create(UserCreateRequest request) {
         if (userRepository.existsUserByUsername(request.getUsername())) {
             throw new AppException(ErrorCode.USER_ALREADY_EXISTS);
         }
@@ -41,8 +45,8 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setConfirmPassword(passwordEncoder.encode(request.getConfirmPassword()));
 
-        HashSet<String> roles = new HashSet<>();
-        roles.add(Role.USER.name());
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findById("USER").orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND)));
         user.setRoles(roles);
 
         var saved = userRepository.save(user);
@@ -64,10 +68,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse update (UserRequest request, String id) {
-        var user = userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
-        var updatedUser = userMapper.updateUser(user, request);
-        return userMapper.toUserResponse(updatedUser);
+    public UserResponse update(UserUpdateRequest request, String id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        User updatedUser = userMapper.toUpdateUser(user, request);
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findById("USER").orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND)));
+        user.setRoles(roles);
+        return userMapper.toUserResponse(userRepository.save(updatedUser));
     }
 
     @Override
