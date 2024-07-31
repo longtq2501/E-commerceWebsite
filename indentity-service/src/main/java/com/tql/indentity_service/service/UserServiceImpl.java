@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
     RoleRepository roleRepository;
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public UserResponse create(UserCreateRequest request) {
         if (userRepository.existsUserByUsername(request.getUsername())) {
             throw new AppException(ErrorCode.USER_ALREADY_EXISTS);
@@ -62,6 +63,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public UserResponse getById(String id) {
         var user = userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         return userMapper.toUserResponse(user);
