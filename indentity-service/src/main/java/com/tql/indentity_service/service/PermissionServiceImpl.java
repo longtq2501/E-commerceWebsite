@@ -25,6 +25,7 @@ public class PermissionServiceImpl implements PermissionService {
     PermissionMapper permissionMapper;
 
     @Override
+    @PreAuthorize("hasAuthority('ADMIN')")
     public PermissionResponse create(PermissionRequest request) {
         if(permissionRepository.existsByName(request.getName())) {
             throw new AppException(ErrorCode.PERMISSION_EXISTED);

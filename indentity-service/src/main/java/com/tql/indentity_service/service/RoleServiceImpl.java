@@ -62,7 +62,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public RoleResponse update(RoleRequest request, String name) {
         if(!roleRepository.existsByName(name)){
             throw new AppException(ErrorCode.ROLE_NOT_EXISTED);

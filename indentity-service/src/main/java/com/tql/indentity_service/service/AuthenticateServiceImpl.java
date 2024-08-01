@@ -19,6 +19,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -43,6 +44,7 @@ public class AuthenticateServiceImpl implements AuthenticateService {
     private String SIGNER_KEY;
 
     @Override
+    @PreAuthorize("hasAuthority('USER')")
     public AuthenticateResponse authenticate(AuthenticateRequest request) {
         var user = userRepository.findByUsername(request.getUsername());
         var authenticated = passwordEncoder.matches(request.getPassword(), user.getPassword());
