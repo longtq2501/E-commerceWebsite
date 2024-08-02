@@ -26,10 +26,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE, makeFinal = true)
 @Slf4j
 public class SecurityConfig {
+
     CustomJwtDecoder customJwtDecoder;
 
     private String[] PUBLIC_ENDPOINTS = {
-            "/user/create", "/auth/login", "/auth/introspect", "/auth/logout"
+            "/user/create", "/auth/login", "/auth/introspect", "/auth/logout", "/auth/refresh",
     };
 
     @Bean

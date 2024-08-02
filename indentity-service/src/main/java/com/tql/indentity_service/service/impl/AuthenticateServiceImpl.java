@@ -8,6 +8,7 @@ import com.nimbusds.jwt.SignedJWT;
 import com.tql.indentity_service.dto.request.AuthenticateRequest;
 import com.tql.indentity_service.dto.request.IntrospectRequest;
 import com.tql.indentity_service.dto.request.LogoutRequest;
+import com.tql.indentity_service.dto.request.RefreshRequest;
 import com.tql.indentity_service.dto.response.AuthenticateResponse;
 import com.tql.indentity_service.dto.response.IntrospectResponse;
 import com.tql.indentity_service.entity.InvalidatedToken;
@@ -141,6 +142,31 @@ public class AuthenticateServiceImpl implements AuthenticateService {
                 .build();
 
         invalidatedTokenRepository.save(invalidatedToken);
+    }
+
+    @Override
+    public AuthenticateResponse refreshToken(RefreshRequest request) throws ParseException, JOSEException {
+        var signToken = verifyToken(request.getToken());
+        String jti = signToken.getJWTClaimsSet().getJWTID();
+        Date expiryTime = signToken.getJWTClaimsSet().getExpirationTime();
+
+        InvalidatedToken invalidatedToken = InvalidatedToken.builder()
+                .id(jti)
+                .expiryTime(expiryTime)
+                .build();
+
+        invalidatedTokenRepository.save(invalidatedToken);
+
+        var username = signToken.getJWTClaimsSet().getSubject();
+
+        var user = userRepository.findByUsername(username);
+
+        var token = generateToken(user);
+
+        return AuthenticateResponse.builder()
+                .token(token)
+                .result(true)
+                .build();
     }
 
     private String buildScope(User user) {

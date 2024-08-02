@@ -16,7 +16,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.text.ParseException;
 import java.util.Objects;
 
-@Component
+@Component("customJwtDecoder")
 public class CustomJwtDecoder implements JwtDecoder {
     @Autowired
     private AuthenticateService authenticateService;

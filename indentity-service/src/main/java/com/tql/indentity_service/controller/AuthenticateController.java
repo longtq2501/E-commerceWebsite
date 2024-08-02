@@ -1,10 +1,7 @@
 package com.tql.indentity_service.controller;
 
 import com.nimbusds.jose.JOSEException;
-import com.tql.indentity_service.dto.request.ApiResponse;
-import com.tql.indentity_service.dto.request.AuthenticateRequest;
-import com.tql.indentity_service.dto.request.IntrospectRequest;
-import com.tql.indentity_service.dto.request.LogoutRequest;
+import com.tql.indentity_service.dto.request.*;
 import com.tql.indentity_service.dto.response.AuthenticateResponse;
 import com.tql.indentity_service.dto.response.IntrospectResponse;
 import com.tql.indentity_service.service.AuthenticateService;
@@ -44,5 +41,13 @@ public class AuthenticateController {
     ApiResponse<Void> logout(@RequestBody LogoutRequest request) throws ParseException, JOSEException {
         authenticateService.logout(request);
         return ApiResponse.<Void>builder().build();
+    }
+
+    @PostMapping("/refresh")
+    ApiResponse<AuthenticateResponse> refreshToken(@RequestBody RefreshRequest request) throws ParseException, JOSEException {
+        var refreshToken = authenticateService.refreshToken(request);
+        return ApiResponse.<AuthenticateResponse>builder()
+                .result(refreshToken)
+                .build();
     }
 }

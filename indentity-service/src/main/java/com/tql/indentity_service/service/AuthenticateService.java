@@ -4,6 +4,7 @@ import com.nimbusds.jose.JOSEException;
 import com.tql.indentity_service.dto.request.AuthenticateRequest;
 import com.tql.indentity_service.dto.request.IntrospectRequest;
 import com.tql.indentity_service.dto.request.LogoutRequest;
+import com.tql.indentity_service.dto.request.RefreshRequest;
 import com.tql.indentity_service.dto.response.AuthenticateResponse;
 import com.tql.indentity_service.dto.response.IntrospectResponse;
 import com.tql.indentity_service.entity.User;
@@ -17,4 +18,6 @@ public interface AuthenticateService {
     IntrospectResponse introspect(IntrospectRequest request) throws JOSEException, ParseException;
 
     void logout(LogoutRequest request) throws JOSEException, ParseException;
+
+    AuthenticateResponse refreshToken(RefreshRequest request) throws ParseException, JOSEException;
 }
