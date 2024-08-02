@@ -3,7 +3,7 @@ package com.tql.indentity_service.controller;
 import com.tql.indentity_service.dto.request.ApiResponse;
 import com.tql.indentity_service.dto.request.RoleRequest;
 import com.tql.indentity_service.dto.response.RoleResponse;
-import com.tql.indentity_service.service.impl.RoleService;
+import com.tql.indentity_service.service.RoleService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

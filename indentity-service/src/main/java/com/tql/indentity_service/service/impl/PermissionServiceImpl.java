@@ -1,13 +1,12 @@
-package com.tql.indentity_service.service;
+package com.tql.indentity_service.service.impl;
 
 import com.tql.indentity_service.dto.request.PermissionRequest;
 import com.tql.indentity_service.dto.response.PermissionResponse;
-import com.tql.indentity_service.entity.Permission;
 import com.tql.indentity_service.enums.ErrorCode;
 import com.tql.indentity_service.exception.AppException;
 import com.tql.indentity_service.mapper.PermissionMapper;
 import com.tql.indentity_service.repository.PermissionRepository;
-import com.tql.indentity_service.service.impl.PermissionService;
+import com.tql.indentity_service.service.PermissionService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;

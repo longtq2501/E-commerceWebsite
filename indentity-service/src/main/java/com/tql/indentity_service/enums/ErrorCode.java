@@ -25,7 +25,7 @@ public enum ErrorCode {
     ROLE_EXISTED(1015, "Role existed", HttpStatus.BAD_REQUEST),
     ROLE_NOT_EXISTED(1017, "Role not existed", HttpStatus.BAD_REQUEST),
     PERMISSION_NOT_ALLOWED(1020, "Permission not allowed", HttpStatus.BAD_REQUEST),
-    ;
+    EXPIRED_TOKEN(1021, "", HttpStatus.BAD_REQUEST);
 
     private int code;
     private String message;

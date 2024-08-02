@@ -4,7 +4,7 @@ import com.tql.indentity_service.dto.request.ApiResponse;
 import com.tql.indentity_service.dto.request.UserCreateRequest;
 import com.tql.indentity_service.dto.request.UserUpdateRequest;
 import com.tql.indentity_service.dto.response.UserResponse;
-import com.tql.indentity_service.service.impl.UserService;
+import com.tql.indentity_service.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;

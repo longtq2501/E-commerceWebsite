@@ -1,4 +1,4 @@
-package com.tql.indentity_service.service;
+package com.tql.indentity_service.service.impl;
 
 import com.tql.indentity_service.dto.request.UserCreateRequest;
 import com.tql.indentity_service.dto.request.UserUpdateRequest;
@@ -10,7 +10,7 @@ import com.tql.indentity_service.enums.ErrorCode;
 import com.tql.indentity_service.mapper.UserMapper;
 import com.tql.indentity_service.repository.RoleRepository;
 import com.tql.indentity_service.repository.UserRepository;
-import com.tql.indentity_service.service.impl.UserService;
+import com.tql.indentity_service.service.UserService;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +37,6 @@ public class UserServiceImpl implements UserService {
     RoleRepository roleRepository;
 
     @Override
-    @PreAuthorize("hasAuthority('CREATE_DATA')")
     public UserResponse create(UserCreateRequest request) {
         if (userRepository.existsUserByUsername(request.getUsername())) {
             throw new AppException(ErrorCode.USER_ALREADY_EXISTS);

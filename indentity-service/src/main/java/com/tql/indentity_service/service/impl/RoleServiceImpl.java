@@ -1,15 +1,14 @@
-package com.tql.indentity_service.service;
+package com.tql.indentity_service.service.impl;
 
 import com.tql.indentity_service.dto.request.RoleRequest;
 import com.tql.indentity_service.dto.response.RoleResponse;
-import com.tql.indentity_service.entity.Permission;
 import com.tql.indentity_service.entity.Role;
 import com.tql.indentity_service.enums.ErrorCode;
 import com.tql.indentity_service.exception.AppException;
 import com.tql.indentity_service.mapper.RoleMapper;
 import com.tql.indentity_service.repository.PermissionRepository;
 import com.tql.indentity_service.repository.RoleRepository;
-import com.tql.indentity_service.service.impl.RoleService;
+import com.tql.indentity_service.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;

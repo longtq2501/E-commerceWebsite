@@ -1,4 +1,4 @@
-package com.tql.indentity_service.service.impl;
+package com.tql.indentity_service.service;
 
 import com.tql.indentity_service.dto.request.UserCreateRequest;
 import com.tql.indentity_service.dto.request.UserUpdateRequest;

@@ -1,4 +1,4 @@
-package com.tql.indentity_service.service.impl;
+package com.tql.indentity_service.service;
 
 import com.tql.indentity_service.dto.request.PermissionRequest;
 import com.tql.indentity_service.dto.response.PermissionResponse;

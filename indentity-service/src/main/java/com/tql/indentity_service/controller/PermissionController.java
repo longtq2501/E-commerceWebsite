@@ -3,7 +3,7 @@ package com.tql.indentity_service.controller;
 import com.tql.indentity_service.dto.request.ApiResponse;
 import com.tql.indentity_service.dto.request.PermissionRequest;
 import com.tql.indentity_service.dto.response.PermissionResponse;
-import com.tql.indentity_service.service.impl.PermissionService;
+import com.tql.indentity_service.service.PermissionService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
