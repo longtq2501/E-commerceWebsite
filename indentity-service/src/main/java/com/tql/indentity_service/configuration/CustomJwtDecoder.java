@@ -3,8 +3,13 @@ package com.tql.indentity_service.configuration;
 import com.nimbusds.jose.JOSEException;
 import com.tql.indentity_service.dto.request.IntrospectRequest;
 import com.tql.indentity_service.service.AuthenticateService;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -16,15 +21,20 @@ import javax.crypto.spec.SecretKeySpec;
 import java.text.ParseException;
 import java.util.Objects;
 
+//@Configuration
 @Component("customJwtDecoder")
+@RequiredArgsConstructor
+@FieldDefaults(level = lombok.AccessLevel.PRIVATE, makeFinal = true)
 public class CustomJwtDecoder implements JwtDecoder {
-    @Autowired
-    private AuthenticateService authenticateService;
 
-    private NimbusJwtDecoder nimbusJwtDecoder = null;
+    AuthenticateService authenticateService;
+
+    @NonFinal
+    NimbusJwtDecoder nimbusJwtDecoder = null;
 
     @Value("${spring.jwt.signerKey}")
-    private String signerKey;
+    @NonFinal
+    String signerKey;
 
 
     @Override
