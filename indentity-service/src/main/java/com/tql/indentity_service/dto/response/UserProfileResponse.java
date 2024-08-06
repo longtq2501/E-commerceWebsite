@@ -1,5 +1,4 @@
-package com.tql.indentity_service.dto.request;
-
+package com.tql.indentity_service.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -9,11 +8,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserCreateRequest {
-    String username;
-    String name;
-    String password;
-    String confirmPassword;
+public class UserProfileResponse {
+    String userId;
     String firstName;
     String lastName;
     String city;

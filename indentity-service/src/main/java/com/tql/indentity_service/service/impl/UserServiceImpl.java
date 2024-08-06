@@ -7,9 +7,11 @@ import com.tql.indentity_service.entity.Role;
 import com.tql.indentity_service.entity.User;
 import com.tql.indentity_service.exception.AppException;
 import com.tql.indentity_service.enums.ErrorCode;
+import com.tql.indentity_service.mapper.ProfileMapper;
 import com.tql.indentity_service.mapper.UserMapper;
 import com.tql.indentity_service.repository.RoleRepository;
 import com.tql.indentity_service.repository.UserRepository;
+import com.tql.indentity_service.repository.httpclient.ProfileClient;
 import com.tql.indentity_service.service.UserService;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -35,6 +37,8 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
     PasswordEncoder passwordEncoder;
     RoleRepository roleRepository;
+    ProfileClient profileClient;
+    ProfileMapper profileMapper;
 
     @Override
     public UserResponse create(UserCreateRequest request) {
@@ -49,8 +53,16 @@ public class UserServiceImpl implements UserService {
         roles.add(roleRepository.findById("USER").orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND)));
         user.setRoles(roles);
 
-        var saved = userRepository.save(user);
-        return userMapper.toUserResponse(saved);
+        user = userRepository.save(user);
+
+        var profileRequest = profileMapper.toProfileCreationRequest(request);
+        profileRequest.setUserId(user.getId());
+
+        var profileResponse = profileClient.createProfile(profileRequest);
+
+        log.info(profileResponse.toString());
+
+        return userMapper.toUserResponse(user);
     }
 
     @Override

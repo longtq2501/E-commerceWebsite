@@ -9,11 +9,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserCreateRequest {
-    String username;
-    String name;
-    String password;
-    String confirmPassword;
+public class ProfileCreationRequest {
+    String userId;
     String firstName;
     String lastName;
     String city;

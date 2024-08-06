@@ -23,6 +23,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Override
     public UserProfileResponse createProfile(UserProfileRequest request) {
         UserProfile userProfile = userProfileMapper.toUserProfile(request);
+        userProfile.setUserId(request.getUserId());
         userProfile =  userProfileRepository.save(userProfile);
         return userProfileMapper.toUserProfileResponse(userProfile);
     }
