@@ -7,6 +7,7 @@ import com.tql.indentity_service.dto.response.IntrospectResponse;
 import com.tql.indentity_service.service.AuthenticateService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
