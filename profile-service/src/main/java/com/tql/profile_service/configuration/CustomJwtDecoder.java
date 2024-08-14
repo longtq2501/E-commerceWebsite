@@ -1,7 +1,6 @@
-package com.tql.indentity_service.configuration;
+package com.tql.profile_service.configuration;
 
 import com.nimbusds.jwt.SignedJWT;
-import com.tql.indentity_service.service.AuthenticateService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
@@ -19,8 +18,6 @@ import java.text.ParseException;
 @RequiredArgsConstructor
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE, makeFinal = true)
 public class CustomJwtDecoder implements JwtDecoder {
-
-    AuthenticateService authenticateService;
 
     @NonFinal
     NimbusJwtDecoder nimbusJwtDecoder = null;

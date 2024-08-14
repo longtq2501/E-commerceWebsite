@@ -21,7 +21,7 @@ import java.util.List;
 public class UserController {
     UserService userService;
 
-    @PostMapping("/create")
+    @PostMapping("/register")
     ApiResponse<UserResponse> create(@RequestBody UserCreateRequest request) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.create(request))

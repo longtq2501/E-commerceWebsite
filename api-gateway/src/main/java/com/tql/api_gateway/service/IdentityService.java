@@ -20,6 +20,4 @@ public class IdentityService {
                         .token(token)
                 .build());
     }
-
-
 }

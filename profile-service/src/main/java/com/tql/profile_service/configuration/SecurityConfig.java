@@ -1,6 +1,5 @@
-package com.tql.indentity_service.configuration;
+package com.tql.profile_service.configuration;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
